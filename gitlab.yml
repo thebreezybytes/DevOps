@@ -1,0 +1,54 @@
+stages:
+  - deploy
+
+deploy_to_kubernetes:
+  stage: deploy
+  script:
+    - echo "Deploying to Kubernetes..."
+    - >
+      cat <<EOF | kubectl apply -f -
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: consent-service
+        namespace: sprintt-dev2
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: consent-service
+        template:
+          metadata:
+            labels:
+              app: consent-service
+          spec:
+            containers:
+              - name: consent-service
+                image: dgxtempdev2acrsprintt.azurecr.io/consent-service:V001
+                imagePullPolicy: Always
+                ports:
+                  - containerPort: 9011
+                env:
+                  - name: SPRING_PROFILES_ACTIVE
+                    valueFrom:
+                      configMapKeyRef:
+                        name: spring-config
+                        key: spring-profile
+                  - name: spring.datasource.url
+                    value: jdbc:sqlserver://sprinttdev2sqlserver.database.windows.net:1433;database=pdr_consent_prod
+                  - name: spring.datasource.username
+                    value: Dgxusradmin
+                  - name: spring.datasource.password
+                    value: T!98Bxs!IoiMm
+                  - name: spring.datasource.driverClassName
+                    value: com.microsoft.sqlserver.jdbc.SQLServerDriver
+                  - name: spring.jpa.database
+                    value: sqlserver
+                  - name: jasypt.encryptor.password
+                    value: c2VjcmV0
+                  - name: sprintt.azure.servicebus.connectionstring.hipaa
+                    value: Endpoint=sb://dgxsprinttservicebusdev2.servicebus.windows.net/;SharedAccessKeyName=dgxsprintthipaaqueue;SharedAccessKey=FU+RhgrAjXirrNCZKZXvQcIGPjhqWm1jrZMx17wmKpw=;EntityPath=dgxsprintthipaaqueue
+                  # Add any additional environment variables here if needed
+      EOF
+  only:
+    - master  # Optional: Specify the branch where you want to deploy
