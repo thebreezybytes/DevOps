@@ -1,0 +1,30 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - |
+      kubectl apply -f - <<EOF
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: my-app-deployment
+      spec:
+        replicas: 3
+        selector:
+          matchLabels:
+            app: my-app
+        template:
+          metadata:
+            labels:
+              app: my-app
+          spec:
+            containers:
+              - name: my-app-container
+                image: your-docker-image:tag
+                ports:
+                  - containerPort: 80
+      EOF
+  only:
+    - master  # Specify the branch to trigger this deployment job
