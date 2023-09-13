@@ -1,0 +1,57 @@
+Kubernetes is a powerful container orchestration platform, and managing Kubernetes clusters often involves using various command-line tools. Here are some key Kubernetes commands that are frequently used:
+
+1. **kubectl**: The Kubernetes command-line tool for interacting with Kubernetes clusters. Most Kubernetes tasks are performed using `kubectl`. Here are some common `kubectl` commands:
+
+   - `kubectl get`: Retrieve information about resources (pods, services, deployments, etc.) in the cluster.
+   - `kubectl describe`: Display detailed information about a specific resource.
+   - `kubectl create`: Create a resource from a YAML or JSON file.
+   - `kubectl apply`: Apply changes to resources defined in a YAML or JSON file.
+   - `kubectl delete`: Delete resources by name or from a YAML/JSON file.
+   - `kubectl exec`: Execute a command in a running container.
+   - `kubectl logs`: View logs of a specific pod/container.
+
+2. **kubectl config**: Manage Kubernetes configuration files, including contexts, clusters, and users.
+
+   - `kubectl config use-context`: Switch between different contexts (clusters).
+   - `kubectl config get-contexts`: List available contexts.
+
+3. **kubectl cluster-info**: Display information about the Kubernetes cluster, including the API server address.
+
+4. **kubectl version**: Check the client and server versions of `kubectl` and the Kubernetes cluster.
+
+5. **kubectl port-forward**: Forward one or more local ports to a pod.
+
+6. **kubectl proxy**: Start a proxy to the Kubernetes API server for accessing services running within the cluster.
+
+7. **kubectl scale**: Scale the number of replicas for a deployment, replicaset, or other scalable resource.
+
+8. **kubectl rollout**: Manage rollouts and updates for deployments.
+
+   - `kubectl rollout status`: Check the status of a rollout.
+   - `kubectl rollout history`: View rollout history.
+
+9. **kubectl apply -f**: Apply resources defined in a YAML or JSON file to the cluster. For example: `kubectl apply -f my-deployment.yaml`.
+
+10. **kubectl get pods --namespace <namespace>**: List pods in a specific namespace.
+
+11. **kubectl describe pod <pod-name>**: Describe details of a specific pod.
+
+12. **kubectl logs <pod-name>**: View logs for a specific pod.
+
+13. **kubectl exec -it <pod-name> -- <command>**: Execute an interactive shell within a pod.
+
+14. **kubectl get services**: List all services in the current namespace.
+
+15. **kubectl create namespace <namespace-name>**: Create a new namespace.
+
+16. **kubectl delete namespace <namespace-name>**: Delete a namespace and all its resources.
+
+17. **kubectl get nodes**: List all nodes in the cluster.
+
+18. **kubectl drain <node-name>**: Safely evict all pods from a node for maintenance.
+
+19. **kubectl uncordon <node-name>**: Mark a previously drained node as schedulable again.
+
+20. **kubectl top pods**: View CPU and memory usage for pods.
+
+These are some of the most commonly used `kubectl` commands in Kubernetes. Remember to replace placeholders like `<namespace>`, `<pod-name>`, and `<node-name>` with your specific values when using these commands. Additionally, you can explore `kubectl` further by checking its documentation or using `kubectl --help` to see the available options and subcommands.
